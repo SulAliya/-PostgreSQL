@@ -9,10 +9,11 @@ with psycopg2.connect(
     password='Qwerty098'
 ) as conn:
     with conn.cursor() as cur:
-        with open('vacancy_json.json', encoding="utf8") as f:
-            reader = csv.DictReader(f)
+        with open('vacancy_json.json', encoding="utf8") as file:
+            reader = csv.DictReader(file)
             for row in reader:
-                cur.execute("INSERT INTO vacancy_table VALUES (%s,%s,%s,%s,%s)", (row.get('job_title'),
+                cur.execute('INSERT INTO vacancy_table VALUES (%s,%s,%s,%s,%s,%s)', (row.get('company'),
+                                                                                  row.get('job_title'),
                                                                                   row.get('link_to_vacancy'),
                                                                                   row.get('salary'),
                                                                                   row.get('description'),

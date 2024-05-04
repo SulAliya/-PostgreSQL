@@ -2,8 +2,7 @@
 
 CREATE TABLE vacancy_table
 (
-    company_id int PRIMARY KEY,
-    vacancy_id int NOT NULL,
+    company varchar (100),
     job_title varchar(100),
     link_to_vacancy text,
     salary text,

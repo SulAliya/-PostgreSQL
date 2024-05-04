@@ -58,8 +58,8 @@ if __name__ == "__main__":
     for vacancy in vacancies:
         print(vacancy)
         filename = 'vacancy_json.json'
-        with open(filename, 'a', encoding='utf-8') as outfile:
-            json.dump(vacancy, outfile, ensure_ascii=False, indent=4)
-            outfile.write(f'{vacancy}\n')
+        with open(filename, 'w', encoding='utf-8') as outfile:
+            json.dump(vacancies, outfile, ensure_ascii=False, indent=4)
+
 
 
