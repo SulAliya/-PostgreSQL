@@ -11,8 +11,8 @@ def load_vacancies():
         "Тензор",
         "Контур",
         "ASTON",
-        "Сбер"
-        "Альфа-Банк"
+        "Sber",
+        "Альфа-Банк",
         "VK",
         "ТрансТехСервис"
     ]
@@ -20,7 +20,7 @@ def load_vacancies():
 
     for company in companies:
         url = "https://api.hh.ru/vacancies"
-        params = {'text': company, 'per_page': 10}
+        params = {'text': company, 'per_page': 100}
         data = requests.get(url, params=params)
 
         if data.status_code == 200:
@@ -30,13 +30,8 @@ def load_vacancies():
                 link_to_vacancy = item['alternate_url']
                 salary = item['salary']
                 if salary:
-                    salary_from = salary.get('from', 'Зарплата не указана')
-                    salary_to = salary.get('to', 'не указано')
-                    currency = salary.get('currency')
-                else:
-                    salary_from = 'Зарплата не указана'
-                    salary_to = ''
-                    currency = ''
+                    salary_from = salary.get('from')
+                    salary_to = salary.get('to')
                 description = item['snippet']['responsibility']
                 requirement = item['snippet']['requirement']
 
@@ -44,7 +39,8 @@ def load_vacancies():
                     "company": company,
                     "job_title": job_title,
                     "link_to_vacancy": link_to_vacancy,
-                    "salary": [f'От {salary_from}, до {salary_to} {currency}'],
+                    "salary_from": salary_from,
+                    "salary_to": salary_to,
                     "description": description,
                     "requirement": requirement
                 })
