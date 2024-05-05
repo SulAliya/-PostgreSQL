@@ -21,7 +21,7 @@ class DBManager:
                 GROUP BY company
                 """
         self.cur.execute(query)
-        return self.cur.fetchall()
+        return {row[0]: row[1] for row in self.cur.fetchall()}
 
     def get_all_vacancies(self):
         """
@@ -44,7 +44,8 @@ class DBManager:
                 FROM vacancy_table
                 """
         self.cur.execute(query)
-        return self.cur.fetchall()
+        result = self.cur.fetchone()
+        return result[0] if result else None
 
     def get_vacancies_with_higher_salary(self):
         """
